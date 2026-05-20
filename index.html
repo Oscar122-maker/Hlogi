@@ -1,1457 +1,214 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hlogi Yummy Bakery | Freshly Baked, Made with Love</title>
-    <style>
-        :root {
-            --pink: #df0f7d;
-            --pink-soft: #ffe5f2;
-            --plum: #5a0c2b;
-            --plum-dark: #1b0710;
-            --ink: #171014;
-            --muted: #71636a;
-            --cream: #fff8ef;
-            --white: #ffffff;
-            --gold: #d69a2d;
-            --line: rgba(90, 12, 43, 0.14);
-            --shadow: 0 24px 70px rgba(90, 12, 43, 0.16);
-            --radius: 8px;
-        }
-
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            margin: 0;
-            color: var(--ink);
-            background: var(--cream);
-            font-family: Arial, Helvetica, sans-serif;
-            line-height: 1.55;
-        }
-        img { display: block; width: 100%; }
-        a { color: inherit; }
-        button, input, textarea { font: inherit; }
-
-        .icon {
-            width: 18px;
-            height: 18px;
-            flex: 0 0 auto;
-            fill: none;
-            stroke: currentColor;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            stroke-width: 2.2;
-        }
-
-        .button {
-            min-height: 48px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 13px 22px;
-            border: 0;
-            border-radius: 999px;
-            color: var(--white);
-            background: var(--pink);
-            font-weight: 900;
-            text-decoration: none;
-            cursor: pointer;
-            box-shadow: 0 18px 34px rgba(223, 15, 125, 0.24);
-            transition: transform 180ms ease, background 180ms ease;
-        }
-        .button:hover { transform: translateY(-2px); background: var(--plum); }
-        .button.secondary {
-            color: var(--plum);
-            background: var(--white);
-            border: 1px solid var(--line);
-            box-shadow: none;
-        }
-
-        .nav {
-            position: fixed;
-            inset: 0 0 auto;
-            z-index: 50;
-            background: rgba(255, 255, 255, 0.95);
-            border-bottom: 1px solid var(--line);
-            backdrop-filter: blur(18px);
-        }
-        .nav-inner {
-            width: min(1180px, calc(100% - 32px));
-            min-height: 76px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 22px;
-        }
-        .brand {
-            min-width: max-content;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        .brand img {
-            width: 64px;
-            height: 50px;
-            object-fit: contain;
-        }
-        .brand-copy {
-            display: block;
-        }
-        .brand-copy strong {
-            display: block;
-            color: var(--ink);
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 1.12rem;
-            line-height: 1;
-        }
-        .brand-copy span {
-            display: block;
-            margin-top: 5px;
-            color: var(--pink);
-            font-size: 0.72rem;
-            font-weight: 900;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .nav-links a {
-            padding: 10px 12px;
-            border-radius: 999px;
-            color: var(--ink);
-            font-size: 0.92rem;
-            font-weight: 800;
-            text-decoration: none;
-        }
-        .nav-links a:hover {
-            color: var(--white);
-            background: var(--pink);
-        }
-        .nav-toggle {
-            display: none;
-            width: 44px;
-            height: 44px;
-            place-items: center;
-            border: 1px solid var(--line);
-            border-radius: 50%;
-            color: var(--plum);
-            background: var(--white);
-            cursor: pointer;
-        }
-        .nav-toggle span {
-            width: 18px;
-            height: 2px;
-            display: block;
-            background: currentColor;
-            border-radius: 999px;
-            transition: transform 180ms ease, opacity 180ms ease;
-        }
-        .nav-toggle span + span { margin-top: 4px; }
-        .nav.is-open .nav-toggle span:first-child { transform: translateY(6px) rotate(45deg); }
-        .nav.is-open .nav-toggle span:nth-child(2) { opacity: 0; }
-        .nav.is-open .nav-toggle span:last-child { transform: translateY(-6px) rotate(-45deg); }
-
-        .container {
-            width: min(1180px, calc(100% - 44px));
-            margin: 0 auto;
-        }
-        section { padding: 88px 0; }
-        .eyebrow {
-            margin: 0 0 12px;
-            color: var(--pink);
-            font-size: 0.78rem;
-            font-weight: 900;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-        h1, h2, h3 {
-            margin: 0;
-            font-family: Georgia, "Times New Roman", serif;
-            line-height: 1.02;
-            letter-spacing: 0;
-        }
-        h1 {
-            max-width: 850px;
-            color: var(--white);
-            font-size: clamp(3rem, 7vw, 6rem);
-            font-weight: 700;
-        }
-        h2 {
-            color: var(--ink);
-            font-size: clamp(2rem, 4.4vw, 3.8rem);
-        }
-        h3 {
-            color: var(--plum);
-            font-size: 1.35rem;
-        }
-        .section-head {
-            display: flex;
-            align-items: end;
-            justify-content: space-between;
-            gap: 28px;
-            margin-bottom: 34px;
-        }
-        .section-head p:last-child {
-            max-width: 560px;
-            margin: 0;
-            color: var(--muted);
-        }
-
-        .hero {
-            min-height: 100vh;
-            padding: 128px 0 60px;
-            display: grid;
-            align-items: end;
-            background:
-                linear-gradient(90deg, rgba(27, 7, 16, 0.94), rgba(90, 12, 43, 0.78) 48%, rgba(27, 7, 16, 0.18)),
-                url("assets/hero-packaging.jpeg") center/cover;
-        }
-        .hero-logo {
-            width: min(240px, 64vw);
-            margin-bottom: 24px;
-            padding: 14px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-        .hero p:not(.eyebrow) {
-            max-width: 670px;
-            margin: 24px 0 30px;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: clamp(1.04rem, 2vw, 1.24rem);
-        }
-        .hero-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .hero-stats {
-            width: min(850px, 100%);
-            margin-top: 50px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-        }
-        .hero-stats div {
-            padding: 18px;
-            border-right: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        .hero-stats div:last-child { border-right: 0; }
-        .hero-stats strong {
-            display: block;
-            color: var(--white);
-            line-height: 1.2;
-        }
-        .hero-stats span {
-            display: block;
-            margin-top: 4px;
-            color: rgba(255, 255, 255, 0.72);
-            font-size: 0.92rem;
-        }
-
-        .about {
-            background: var(--white);
-        }
-        .about-grid {
-            display: grid;
-            grid-template-columns: 0.95fr 1.05fr;
-            gap: 30px;
-            align-items: center;
-        }
-        .photo-frame {
-            overflow: hidden;
-            border-radius: var(--radius);
-            border: 10px solid var(--white);
-            box-shadow: var(--shadow);
-        }
-        .photo-frame img {
-            height: 560px;
-            object-fit: cover;
-        }
-        .about-panel {
-            padding: 38px;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: linear-gradient(135deg, var(--cream), var(--pink-soft));
-        }
-        .about-panel p {
-            color: var(--muted);
-        }
-        .brand-points {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-top: 26px;
-        }
-        .brand-points div {
-            min-height: 82px;
-            padding: 16px;
-            display: grid;
-            align-content: center;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: var(--white);
-        }
-        .brand-points strong {
-            color: var(--plum);
-            line-height: 1.2;
-        }
-        .brand-points span {
-            margin-top: 4px;
-            color: var(--muted);
-            font-size: 0.9rem;
-        }
-
-        .menu {
-            background: var(--cream);
-        }
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-        .menu-card {
-            min-height: 190px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: var(--white);
-            box-shadow: 0 16px 42px rgba(90, 12, 43, 0.08);
-        }
-        .menu-card::before {
-            content: "";
-            position: absolute;
-            inset: 0 0 auto;
-            height: 6px;
-            background: linear-gradient(90deg, var(--pink), var(--gold));
-        }
-        .menu-card .number {
-            width: 44px;
-            height: 44px;
-            display: grid;
-            place-items: center;
-            border-radius: 50%;
-            color: var(--white);
-            background: var(--plum);
-            font-weight: 900;
-        }
-        .menu-card p {
-            margin: 10px 0 0;
-            color: var(--muted);
-        }
-
-        .special {
-            color: var(--white);
-            background:
-                linear-gradient(135deg, rgba(27, 7, 16, 0.96), rgba(90, 12, 43, 0.9)),
-                url("assets/multi-packages.jpeg") center/cover;
-        }
-        .special h2,
-        .special h3 { color: var(--white); }
-        .special .eyebrow { color: #f6d27d; }
-        .special-grid {
-            display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
-            gap: 26px;
-            align-items: stretch;
-        }
-        .special-card {
-            padding: 38px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: var(--radius);
-            background: rgba(255, 255, 255, 0.09);
-            backdrop-filter: blur(12px);
-        }
-        .special-card p {
-            color: rgba(255, 255, 255, 0.76);
-        }
-        .special-facts {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin: 26px 0;
-        }
-        .special-facts div {
-            min-height: 100px;
-            padding: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: var(--radius);
-            background: rgba(255, 255, 255, 0.12);
-        }
-        .special-facts strong {
-            display: block;
-            color: #f6d27d;
-            font-size: 1.4rem;
-            line-height: 1.1;
-        }
-        .special-facts span {
-            display: block;
-            margin-top: 5px;
-            color: rgba(255, 255, 255, 0.72);
-            font-size: 0.9rem;
-        }
-        .special-photo {
-            overflow: hidden;
-            border-radius: var(--radius);
-        }
-        .special-photo img {
-            height: 100%;
-            min-height: 430px;
-            object-fit: cover;
-        }
-
-        .events {
-            background: var(--white);
-        }
-        .event-grid {
-            display: grid;
-            grid-template-columns: 0.9fr 1.1fr;
-            gap: 28px;
-            align-items: center;
-        }
-        .event-image {
-            overflow: hidden;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-        .event-image img {
-            height: 520px;
-            object-fit: cover;
-        }
-        .event-panel {
-            padding: 38px;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: var(--cream);
-        }
-        .event-panel p {
-            color: var(--muted);
-        }
-        .event-list {
-            display: grid;
-            gap: 12px;
-            margin: 24px 0 30px;
-        }
-        .event-item {
-            display: grid;
-            grid-template-columns: 44px 1fr;
-            gap: 12px;
-            align-items: start;
-            padding: 16px;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: var(--white);
-        }
-        .event-item .bubble {
-            width: 44px;
-            height: 44px;
-            display: grid;
-            place-items: center;
-            border-radius: 50%;
-            color: var(--white);
-            background: var(--pink);
-        }
-        .event-item strong {
-            display: block;
-            color: var(--plum);
-            line-height: 1.2;
-        }
-        .event-item span {
-            display: block;
-            margin-top: 4px;
-            color: var(--muted);
-        }
-
-        .order {
-            background:
-                radial-gradient(circle at top left, rgba(223, 15, 125, 0.1), transparent 28%),
-                radial-gradient(circle at top right, rgba(214, 154, 45, 0.13), transparent 30%),
-                var(--cream);
-        }
-        .order-layout {
-            display: grid;
-            grid-template-columns: 1fr 0.88fr;
-            gap: 24px;
-            align-items: start;
-        }
-        .order-builder,
-        .summary-panel {
-            padding: 28px;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: var(--white);
-            box-shadow: 0 18px 45px rgba(90, 12, 43, 0.08);
-        }
-        .form-section {
-            padding: 22px 0;
-            border-top: 1px solid var(--line);
-        }
-        .form-section:first-child {
-            padding-top: 0;
-            border-top: 0;
-        }
-        .form-section h3 {
-            margin-bottom: 14px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 1rem;
-            font-weight: 900;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-        .order-products {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-        .product-row {
-            min-height: 102px;
-            padding: 15px;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 12px;
-            align-items: center;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: var(--cream);
-        }
-        .product-row strong {
-            display: block;
-            color: var(--plum);
-            line-height: 1.2;
-        }
-        .product-row span {
-            display: block;
-            margin-top: 4px;
-            color: var(--muted);
-            font-size: 0.88rem;
-        }
-        .quantity-control {
-            display: grid;
-            grid-template-columns: 36px 48px 36px;
-            align-items: center;
-            overflow: hidden;
-            border: 1px solid var(--line);
-            border-radius: 999px;
-            background: var(--white);
-        }
-        .quantity-control button {
-            width: 36px;
-            height: 38px;
-            border: 0;
-            color: var(--plum);
-            background: transparent;
-            font-size: 1.2rem;
-            font-weight: 900;
-            cursor: pointer;
-        }
-        .quantity-control input {
-            width: 48px;
-            height: 38px;
-            border: 0;
-            color: var(--ink);
-            background: transparent;
-            font-weight: 900;
-            text-align: center;
-        }
-        .quantity-control input::-webkit-outer-spin-button,
-        .quantity-control input::-webkit-inner-spin-button {
-            margin: 0;
-            appearance: none;
-        }
-        .field-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-        .field,
-        .choice {
-            display: grid;
-            gap: 8px;
-        }
-        label {
-            color: var(--plum);
-            font-size: 0.9rem;
-            font-weight: 900;
-        }
-        input[type="text"],
-        input[type="date"],
-        input[type="time"],
-        textarea {
-            width: 100%;
-            min-height: 48px;
-            padding: 12px 14px;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            color: var(--ink);
-            background: var(--white);
-            outline: none;
-        }
-        textarea {
-            min-height: 98px;
-            resize: vertical;
-        }
-        input:focus,
-        textarea:focus {
-            border-color: var(--pink);
-            box-shadow: 0 0 0 4px rgba(223, 15, 125, 0.12);
-        }
-        .choice-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-        .choice-grid.three {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        .choice input {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-        }
-        .choice span {
-            min-height: 54px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 13px 14px;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            color: var(--ink);
-            background: var(--cream);
-            font-weight: 800;
-            cursor: pointer;
-        }
-        .choice input:checked + span {
-            color: var(--white);
-            background: var(--plum);
-            border-color: var(--plum);
-        }
-        .delivery-fields[hidden] { display: none; }
-        .delivery-fields { margin-top: 12px; }
-        .form-note {
-            margin: 12px 0 0;
-            color: var(--muted);
-            font-size: 0.92rem;
-        }
-        .summary-panel {
-            position: sticky;
-            top: 100px;
-        }
-        .summary-panel h3 {
-            font-size: 1.65rem;
-        }
-        .summary-box {
-            min-height: 170px;
-            margin: 18px 0 20px;
-            padding: 18px;
-            white-space: pre-line;
-            border: 1px dashed rgba(90, 12, 43, 0.28);
-            border-radius: var(--radius);
-            color: var(--ink);
-            background: var(--cream);
-        }
-        .summary-panel .button { width: 100%; }
-        .summary-meta {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 18px;
-        }
-        .summary-meta div {
-            min-height: 78px;
-            padding: 14px;
-            border-radius: var(--radius);
-            background: var(--pink-soft);
-        }
-        .summary-meta strong {
-            display: block;
-            color: var(--plum);
-            line-height: 1.2;
-        }
-        .summary-meta span {
-            display: block;
-            margin-top: 4px;
-            color: var(--muted);
-            font-size: 0.88rem;
-        }
-
-        .payment {
-            color: var(--white);
-            background:
-                linear-gradient(135deg, rgba(27, 7, 16, 0.96), rgba(90, 12, 43, 0.9)),
-                url("assets/cookie-packs.jpeg") center/cover;
-        }
-        .payment h2,
-        .payment h3 { color: var(--white); }
-        .payment .eyebrow { color: #f6d27d; }
-        .payment-grid {
-            display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
-            gap: 24px;
-            align-items: center;
-        }
-        .payment-card,
-        .payment-details {
-            padding: 34px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: var(--radius);
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-        }
-        .payment-card p,
-        .payment-details p {
-            color: rgba(255, 255, 255, 0.76);
-        }
-        .steps {
-            display: grid;
-            gap: 12px;
-            margin: 24px 0 0;
-            padding: 0;
-            list-style: none;
-        }
-        .steps li {
-            display: grid;
-            grid-template-columns: 38px 1fr;
-            gap: 12px;
-            padding: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            border-radius: var(--radius);
-            background: rgba(255, 255, 255, 0.11);
-        }
-        .steps b {
-            width: 38px;
-            height: 38px;
-            display: grid;
-            place-items: center;
-            border-radius: 50%;
-            color: var(--plum);
-            background: #f6d27d;
-        }
-        .steps strong {
-            display: block;
-            color: var(--white);
-        }
-        .steps span {
-            color: rgba(255, 255, 255, 0.74);
-        }
-        .detail-list {
-            display: grid;
-            gap: 12px;
-            margin-top: 24px;
-        }
-        .detail-list div {
-            padding: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            border-radius: var(--radius);
-            background: rgba(255, 255, 255, 0.11);
-        }
-        .detail-list span {
-            display: block;
-            color: #f6d27d;
-            font-size: 0.78rem;
-            font-weight: 900;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-        .detail-list strong {
-            display: block;
-            margin-top: 6px;
-            color: var(--white);
-            line-height: 1.25;
-        }
-
-        .gallery {
-            background: var(--white);
-        }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr 0.9fr;
-            grid-auto-rows: 245px;
-            gap: 14px;
-        }
-        .gallery-item {
-            margin: 0;
-            overflow: hidden;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: var(--cream);
-        }
-        .gallery-item.large { grid-row: span 2; }
-        .gallery-item img {
-            height: 100%;
-            object-fit: cover;
-            transition: transform 240ms ease;
-        }
-        .gallery-item:hover img { transform: scale(1.04); }
-
-        .contact {
-            color: var(--white);
-            background: var(--plum-dark);
-        }
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 28px;
-            align-items: center;
-        }
-        .contact h2 { color: var(--white); }
-        .contact p {
-            max-width: 590px;
-            color: rgba(255, 255, 255, 0.76);
-        }
-        .contact-details {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin: 28px 0 30px;
-        }
-        .contact-details div {
-            min-height: 98px;
-            padding: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            border-radius: var(--radius);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .contact-details span {
-            display: block;
-            color: #ff8cc4;
-            font-size: 0.76rem;
-            font-weight: 900;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-        .contact-details strong {
-            display: block;
-            margin-top: 7px;
-            color: var(--white);
-            line-height: 1.25;
-        }
-        .contact-photo {
-            overflow: hidden;
-            border-radius: var(--radius);
-            border: 1px solid rgba(255, 255, 255, 0.16);
-        }
-        .contact-photo img {
-            height: 470px;
-            object-fit: cover;
-        }
-
-        footer {
-            padding: 28px 0;
-            color: rgba(255, 255, 255, 0.7);
-            background: #090506;
-        }
-        .footer-inner {
-            width: min(1180px, calc(100% - 44px));
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 18px;
-            flex-wrap: wrap;
-        }
-        .footer-inner img {
-            width: 78px;
-            height: 54px;
-            object-fit: contain;
-            padding: 4px;
-            border-radius: var(--radius);
-            background: var(--white);
-        }
-
-        @media (max-width: 980px) {
-            .hero { padding-top: 156px; }
-            .about-grid,
-            .special-grid,
-            .event-grid,
-            .order-layout,
-            .payment-grid,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            .menu-grid,
-            .order-products {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .summary-panel { position: static; }
-            .gallery-grid { grid-template-columns: 1fr 1fr; }
-            .gallery-item.large {
-                grid-column: span 2;
-                grid-row: span 1;
-            }
-        }
-
-        @media (max-width: 680px) {
-            .nav-inner {
-                width: min(100% - 22px, 1180px);
-                min-height: auto;
-                padding: 10px 0;
-                position: relative;
-            }
-            .brand img {
-                width: 54px;
-                height: 44px;
-            }
-            .brand-copy strong { font-size: 0.98rem; }
-            .brand-copy span { font-size: 0.64rem; }
-            .nav-toggle { display: inline-grid; }
-            .nav-links {
-                position: absolute;
-                top: calc(100% + 10px);
-                left: 0;
-                right: 0;
-                display: none;
-                flex-direction: column;
-                align-items: stretch;
-                gap: 4px;
-                padding: 10px;
-                border: 1px solid var(--line);
-                border-radius: var(--radius);
-                background: var(--white);
-                box-shadow: var(--shadow);
-            }
-            .nav.is-open .nav-links { display: flex; }
-            .nav-links a {
-                padding: 13px 14px;
-                border-radius: var(--radius);
-                font-size: 0.95rem;
-            }
-            .container,
-            .footer-inner {
-                width: min(100% - 32px, 1180px);
-            }
-            section { padding: 64px 0; }
-            .hero {
-                min-height: auto;
-                padding: 116px 0 46px;
-                background:
-                    linear-gradient(180deg, rgba(27, 7, 16, 0.58), rgba(90, 12, 43, 0.6) 38%, rgba(27, 7, 16, 0.94)),
-                    url("assets/closeup-packaging.jpeg") center top/cover;
-            }
-            .hero-actions,
-            .button {
-                width: 100%;
-            }
-            .hero-stats,
-            .brand-points,
-            .menu-grid,
-            .special-facts,
-            .order-products,
-            .field-grid,
-            .choice-grid,
-            .choice-grid.three,
-            .summary-meta,
-            .contact-details,
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero-stats div {
-                border-right: 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-            }
-            .hero-stats div:last-child { border-bottom: 0; }
-            .section-head {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-            .about-panel,
-            .special-card,
-            .event-panel,
-            .order-builder,
-            .summary-panel,
-            .payment-card,
-            .payment-details {
-                padding: 22px;
-            }
-            .photo-frame img,
-            .special-photo img,
-            .event-image img,
-            .contact-photo img {
-                height: auto;
-                min-height: 0;
-            }
-            .product-row { grid-template-columns: 1fr; }
-            .quantity-control { width: 120px; }
-            .gallery-grid { grid-auto-rows: 245px; }
-            .gallery-item.large { grid-column: auto; }
-            .footer-inner {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hlogi Yummy Bakery delivers freshly baked scones, muffins, biscuits, bread and event packs with a professional ordering experience.">
+  <title>Hlogi Yummy Bakery | Home</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <svg aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute">
-        <symbol id="icon-message" viewBox="0 0 24 24">
-            <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.8 8.8 0 0 1-3.8-.9L3 20l1.2-4.7a8 8 0 0 1-1.1-4A8.5 8.5 0 0 1 12 3a8.5 8.5 0 0 1 9 8.5Z"></path>
-            <path d="M8 10h8M8 14h5"></path>
-        </symbol>
-        <symbol id="icon-bag" viewBox="0 0 24 24">
-            <path d="M6 8h12l-1 12H7L6 8Z"></path>
-            <path d="M9 8a3 3 0 0 1 6 0"></path>
-        </symbol>
-        <symbol id="icon-calendar" viewBox="0 0 24 24">
-            <path d="M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"></path>
-            <path d="M16 2v4M8 2v4M3 10h18"></path>
-        </symbol>
-        <symbol id="icon-truck" viewBox="0 0 24 24">
-            <path d="M3 6h11v10H3V6Z"></path>
-            <path d="M14 10h4l3 3v3h-7v-6Z"></path>
-            <path d="M7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path>
-        </symbol>
-        <symbol id="icon-card" viewBox="0 0 24 24">
-            <path d="M3 6h18v12H3V6Z"></path>
-            <path d="M3 10h18M7 15h4"></path>
-        </symbol>
-        <symbol id="icon-location" viewBox="0 0 24 24">
-            <path d="M12 21s7-5.1 7-11a7 7 0 0 0-14 0c0 5.9 7 11 7 11Z"></path>
-            <path d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
-        </symbol>
-    </svg>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Hlogi Yummy Bakery home">
+        <img src="assets/logo.png" alt="Hlogi Yummy Bakery logo">
+        <div class="brand-copy"><strong>Hlogi Yummy Bakery</strong><span>Freshly baked</span></div>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="siteMenu" aria-expanded="false" aria-label="Open site menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="siteMenu" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="order.html">Order</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <nav class="nav" aria-label="Main navigation">
-        <div class="nav-inner">
-            <a class="brand" href="#home" aria-label="Hlogi Yummy Bakery home">
-                <img src="assets/logo.png" alt="Hlogi Yummy Bakery logo">
-                <span class="brand-copy">
-                    <strong>Hlogi Yummy Bakery</strong>
-                    <span>Freshly baked</span>
-                </span>
-            </a>
-            <button class="nav-toggle" type="button" aria-controls="navMenu" aria-expanded="false" aria-label="Open menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="nav-links" id="navMenu">
-                <a href="#home">Home</a>
-                <a href="#menu">Menu</a>
-                <a href="#order">Order</a>
-                <a href="#events">Events</a>
-                <a href="#payment">Payment</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#contact">Contact</a>
-            </div>
+  <main>
+    <section class="hero home-hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Premium bakery service</p>
+          <h1>Bakery orders for events, corporate gifting and premium delivery.</h1>
+          <p>Hlogi Yummy Bakery delivers beautifully presented baked goods with a polished order process, elegant packaging and fast WhatsApp confirmation.</p>
+          <div class="hero-actions">
+            <a class="button" href="order.html">Start your order</a>
+            <a class="button secondary" href="menu.html">Browse the menu</a>
+          </div>
+          <div class="hero-badges">
+            <span>Trusted for events</span>
+            <span>Corporate-ready packaging</span>
+            <span>Premium quality</span>
+          </div>
         </div>
-    </nav>
 
-    <main>
-        <section id="home" class="hero">
-            <div class="container">
-                
-                <p class="eyebrow">Freshly baked, made with love</p>
-                <h1>Homestyle bakery treats with a polished local brand.</h1>
-                <p>Order scones, muffins, biscuits, bread, jam tarts, banana bread, and event packs from Hlogi Yummy Bakery using a clean WhatsApp order flow.</p>
-                <div class="hero-actions">
-                    <a class="button" href="#order"><svg class="icon"><use href="#icon-bag"></use></svg> Build an Order</a>
-                    <a class="button secondary" href="#menu">View Menu</a>
-                </div>
-                <div class="hero-stats" aria-label="Bakery highlights">
-                    <div><strong>Fresh batches</strong><span>Prepared for collection, delivery, and events.</span></div>
-                    <div><strong>Branded packaging</strong><span>Clear containers, stickers, and shelf-ready packs.</span></div>
-                    <div><strong>Official WhatsApp</strong><span>Use the secure order button on this website.</span></div>
-                </div>
+        <aside class="hero-panel">
+          <div class="hero-visual">
+            
+          </div>
+          <div class="hero-event-card">
+            <div class="event-thumb">
+              <img src="assets/event-pop-up.jpeg" alt="Upcoming bakery event" loading="lazy">
             </div>
-        </section>
-
-        <section class="about" aria-labelledby="about-title">
-            <div class="container about-grid">
-                <div class="photo-frame">
-                    <img src="assets/store-shelf.jpeg" alt="Hlogi Yummy Bakery products displayed on a store shelf">
-                </div>
-                <div class="about-panel">
-                    <p class="eyebrow">About the bakery</p>
-                    <h2 id="about-title">A clean, confident look for a growing bakery.</h2>
-                    <p>The site now uses a calmer professional layout with the bakery sticker colours: hot pink, deep plum, white, black, and baked-gold accents. Product photos stay central so customers can see real packaging and presentation.</p>
-                    <p>Extra event contact numbers have been removed from the website. Customers are guided to the bakery official ordering channel only.</p>
-                    <div class="brand-points">
-                        <div><strong>Homemade taste</strong><span>Warm, familiar bakery favourites.</span></div>
-                        <div><strong>Professional packs</strong><span>Ready for shelves and tables.</span></div>
-                        <div><strong>Clear ordering</strong><span>Fast WhatsApp message builder.</span></div>
-                    </div>
-                </div>
+            <div class="event-details">
+              <p class="event-eyebrow">Upcoming event</p>
+              <h3>Bakery pop-up showcase</h3>
+              <p>Experience fresh treats, gifting bundles and premium bakery previews.</p>
+              <div class="countdown-grid" id="eventCountdown">
+                <div><strong id="countdownDays">00</strong><span>Days</span></div>
+                <div><strong id="countdownHours">00</strong><span>Hours</span></div>
+                <div><strong id="countdownMinutes">00</strong><span>Minutes</span></div>
+                <div><strong id="countdownSeconds">00</strong><span>Seconds</span></div>
+              </div>
+              <p class="event-meta">Saturday, May 23, 2026 • 11:00 AM</p>
             </div>
-        </section>
-
-        <section id="menu" class="menu" aria-labelledby="menu-title">
-            <div class="container">
-                <div class="section-head">
-                    <div>
-                        <p class="eyebrow">The menu</p>
-                        <h2 id="menu-title">Freshly Baked Favourites</h2>
-                    </div>
-                    <p>Simple, clear menu cards for customers who want everyday treats, bulk packs, or event orders.</p>
-                </div>
-                <div class="menu-grid">
-                    <article class="menu-card"><span class="number">01</span><div><h3>Scones</h3><p>Golden scones for tea, family tables, winter specials, and events.</p></div></article>
-                    <article class="menu-card"><span class="number">02</span><div><h3>Muffins</h3><p>Soft muffins for lunch boxes, store shelves, and office orders.</p></div></article>
-                    <article class="menu-card"><span class="number">03</span><div><h3>Biscuits</h3><p>Assorted biscuits packed neatly in branded clear containers.</p></div></article>
-                    <article class="menu-card"><span class="number">04</span><div><h3>Bread</h3><p>Fresh bread prepared for homes, gatherings, and custom orders.</p></div></article>
-                    <article class="menu-card"><span class="number">05</span><div><h3>Jam Tarts</h3><p>Sweet classic tarts with a bright homemade bakery finish.</p></div></article>
-                    <article class="menu-card"><span class="number">06</span><div><h3>Banana Bread</h3><p>Moist banana bread for slices, loaves, and packaged orders.</p></div></article>
-                </div>
+          </div>
+          <div class="hero-stats-wrap">
+            <p class="stats-label">Premium performance</p>
+            <div class="hero-stats">
+              <div>
+                <strong>8+</strong>
+                <span>Years of bakery expertise</span>
+              </div>
+              <div>
+                <strong>150+</strong>
+                <span>Orders managed monthly</span>
+              </div>
+              <div>
+                <strong>24/7</strong>
+                <span>WhatsApp order support</span>
+              </div>
             </div>
-        </section>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-        <section class="special" aria-labelledby="special-title">
-            <div class="container special-grid">
-                <div class="special-card">
-                    <p class="eyebrow">Current special</p>
-                    <h2 id="special-title">Winter scone bundle</h2>
-                    <p>A professional special section replaces the busy poster design. Customers can request the bundle through the order form and confirm availability before payment.</p>
-                    <div class="special-facts">
-                        <div><strong>5 litre</strong><span>Scones</span></div>
-                        <div><strong>R200</strong><span>Special price</span></div>
-                        <div><strong>2 litre</strong><span>Cold drink included</span></div>
-                    </div>
-                    <a class="button" href="#order"><svg class="icon"><use href="#icon-bag"></use></svg> Order Special</a>
-                </div>
-                <div class="special-photo">
-                    <img src="assets/scones-box.jpeg" alt="Box of fresh Hlogi Yummy Bakery scones">
-                </div>
-            </div>
-        </section>
-
-        <section id="events" class="events" aria-labelledby="events-title">
-            <div class="container event-grid">
-                <div class="event-image">
-                    <img src="assets/counter-display.jpeg" alt="Hlogi Yummy Bakery boxed scones and biscuit packs on display">
-                </div>
-                <div class="event-panel">
-                    <p class="eyebrow">Events and pop-ups</p>
-                    <h2 id="events-title">Bakery packs for local events.</h2>
-                    <p>Use this section for pop-up stalls, school functions, family gatherings, meetings, and bulk pre-orders. The design avoids the old event graphic and keeps the information clean.</p>
-                    <div class="event-list">
-                        <div class="event-item">
-                            <span class="bubble"><svg class="icon"><use href="#icon-calendar"></use></svg></span>
-                            <div><strong>Event pre-orders</strong><span>Send your date, quantity, and preferred collection or delivery time.</span></div>
-                        </div>
-                        <div class="event-item">
-                            <span class="bubble"><svg class="icon"><use href="#icon-location"></use></svg></span>
-                            <div><strong>Local pop-ups</strong><span>Fresh bakery packs can be prepared for stalls and community events.</span></div>
-                        </div>
-                        <div class="event-item">
-                            <span class="bubble"><svg class="icon"><use href="#icon-message"></use></svg></span>
-                            <div><strong>Official orders only</strong><span>Customers should use the bakery WhatsApp order form below.</span></div>
-                        </div>
-                    </div>
-                    <a class="button" href="#order"><svg class="icon"><use href="#icon-message"></use></svg> Request Event Order</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="order" class="order" aria-labelledby="order-title">
-            <div class="container">
-                <div class="section-head">
-                    <div>
-                        <p class="eyebrow">WhatsApp order builder</p>
-                        <h2 id="order-title">Pick items, choose delivery, then send.</h2>
-                    </div>
-                    <p>The form creates a ready WhatsApp message so customers do not forget items, quantity, date, delivery details, or payment preference.</p>
-                </div>
-                <div class="order-layout">
-                    <form class="order-builder" id="orderForm">
-                        <div class="form-section">
-                            <h3>1. Choose your items</h3>
-                            <div class="order-products" aria-label="Bakery order items">
-                                <div class="product-row" data-product="Scones"><div><strong>Scones</strong><span>Golden bakery scones</span></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Remove one scones">-</button><input type="number" min="0" value="0" inputmode="numeric" aria-label="Scones quantity"><button type="button" data-step="1" aria-label="Add one scones">+</button></div></div>
-                                <div class="product-row" data-product="Muffins"><div><strong>Muffins</strong><span>Fresh muffins</span></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Remove one muffins">-</button><input type="number" min="0" value="0" inputmode="numeric" aria-label="Muffins quantity"><button type="button" data-step="1" aria-label="Add one muffins">+</button></div></div>
-                                <div class="product-row" data-product="Biscuits"><div><strong>Biscuits</strong><span>Assorted biscuit packs</span></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Remove one biscuits">-</button><input type="number" min="0" value="0" inputmode="numeric" aria-label="Biscuits quantity"><button type="button" data-step="1" aria-label="Add one biscuits">+</button></div></div>
-                                <div class="product-row" data-product="Bread"><div><strong>Bread</strong><span>Fresh bread</span></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Remove one bread">-</button><input type="number" min="0" value="0" inputmode="numeric" aria-label="Bread quantity"><button type="button" data-step="1" aria-label="Add one bread">+</button></div></div>
-                                <div class="product-row" data-product="Jam tarts"><div><strong>Jam Tarts</strong><span>Sweet classic tarts</span></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Remove one jam tarts">-</button><input type="number" min="0" value="0" inputmode="numeric" aria-label="Jam tarts quantity"><button type="button" data-step="1" aria-label="Add one jam tarts">+</button></div></div>
-                                <div class="product-row" data-product="Banana bread"><div><strong>Banana Bread</strong><span>Loaf or slices</span></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Remove one banana bread">-</button><input type="number" min="0" value="0" inputmode="numeric" aria-label="Banana bread quantity"><button type="button" data-step="1" aria-label="Add one banana bread">+</button></div></div>
-                                <div class="product-row" data-product="Winter special"><div><strong>Winter Special</strong><span>5 litre scones plus 2 litre cold drink</span></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Remove one winter special">-</button><input type="number" min="0" value="0" inputmode="numeric" aria-label="Winter special quantity"><button type="button" data-step="1" aria-label="Add one winter special">+</button></div></div>
-                            </div>
-                            <p class="form-note">Final price and availability are confirmed on WhatsApp before payment.</p>
-                        </div>
-
-                        <div class="form-section">
-                            <h3>2. Your details</h3>
-                            <div class="field-grid">
-                                <label class="field">Name<input id="customerName" type="text" placeholder="Your name"></label>
-                                <label class="field">Preferred date<input id="orderDate" type="date"></label>
-                                <label class="field">Preferred time<input id="orderTime" type="time"></label>
-                                <label class="field">Phone number<input id="customerPhone" type="text" placeholder="Your phone number"></label>
-                            </div>
-                        </div>
-
-                        <div class="form-section">
-                            <h3>3. Delivery or collection</h3>
-                            <div class="choice-grid">
-                                <label class="choice"><input type="radio" name="fulfilment" value="Collection" checked><span><svg class="icon"><use href="#icon-bag"></use></svg> Collection</span></label>
-                                <label class="choice"><input type="radio" name="fulfilment" value="Delivery"><span><svg class="icon"><use href="#icon-truck"></use></svg> Delivery</span></label>
-                            </div>
-                            <div class="delivery-fields" id="deliveryFields" hidden>
-                                <label class="field">Delivery address<textarea id="deliveryAddress" placeholder="Street address, area, and delivery notes"></textarea></label>
-                                <p class="form-note">Delivery fee and availability can be confirmed before payment.</p>
-                            </div>
-                        </div>
-
-                        <div class="form-section">
-                            <h3>4. Payment</h3>
-                            <div class="choice-grid three">
-                                <label class="choice"><input type="radio" name="payment" value="EFT / bank transfer" checked><span><svg class="icon"><use href="#icon-card"></use></svg> EFT</span></label>
-                                <label class="choice"><input type="radio" name="payment" value="Cash on collection"><span><svg class="icon"><use href="#icon-bag"></use></svg> Cash</span></label>
-                                <label class="choice"><input type="radio" name="payment" value="Please send payment details"><span><svg class="icon"><use href="#icon-message"></use></svg> Send details</span></label>
-                            </div>
-                            <p class="form-note">Use only the official business account details provided by Hlogi Yummy Bakery.</p>
-                        </div>
-
-                        <div class="form-section">
-                            <h3>5. Extra notes</h3>
-                            <label class="field">Notes<textarea id="orderNotes" placeholder="Example: assorted biscuits, event order, packaging request, or allergy notes"></textarea></label>
-                        </div>
-                    </form>
-
-                    <aside class="summary-panel" aria-live="polite">
-                        <p class="eyebrow">Ready message</p>
-                        <h3>WhatsApp preview</h3>
-                        <div class="summary-box" id="summaryBox">Choose item quantities to build your order.</div>
-                        <button class="button" type="submit" form="orderForm"><svg class="icon"><use href="#icon-message"></use></svg> Send Order on WhatsApp</button>
-                        <div class="summary-meta">
-                            <div><strong>Official WhatsApp</strong><span>076 970 0695</span></div>
-                            <div><strong>Payment safety</strong><span>Use official details only.</span></div>
-                        </div>
-                    </aside>
-                </div>
-            </div>
-        </section>
-
-        <section id="payment" class="payment" aria-labelledby="payment-title">
-            <div class="container payment-grid">
-                <div class="payment-card">
-                    <p class="eyebrow">Payment and safety</p>
-                    <h2 id="payment-title">Order safely through the bakery official channel.</h2>
-                    <p>Customers place the order first, receive confirmation, make payment using the bakery details, send proof of payment, and then collect or receive delivery.</p>
-                    <ul class="steps">
-                        <li><b>1</b><div><strong>Place an order</strong><span>Select products and send the WhatsApp message.</span></div></li>
-                        <li><b>2</b><div><strong>Confirm total</strong><span>The bakery confirms stock, pricing, and timing.</span></div></li>
-                        <li><b>3</b><div><strong>Make payment</strong><span>Use only the official account details.</span></div></li>
-                        <li><b>4</b><div><strong>Send proof</strong><span>Send proof of payment on WhatsApp.</span></div></li>
-                    </ul>
-                </div>
-                <div class="payment-details">
-                    <h3>Official order details</h3>
-                    <p>These are the only business details shown on the site for customer ordering.</p>
-                    <div class="detail-list">
-                        <div><span>WhatsApp</span><strong>076 970 0695</strong></div>
-                        <div><span>Business account</span><strong>2479665247<br>Hlogi Yummy Bakery</strong></div>
-                        <div><span>Email</span><strong>mssceoyummybakery@gmail.com</strong></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="gallery" class="gallery" aria-labelledby="gallery-title">
-            <div class="container">
-                <div class="section-head">
-                    <div>
-                        <p class="eyebrow">Real bakery photos</p>
-                        <h2 id="gallery-title">Product Gallery</h2>
-                    </div>
-                    <p>Actual product and packaging images help customers recognise the brand and know what they are ordering.</p>
-                </div>
-                <div class="gallery-grid">
-                    <figure class="gallery-item large"><img src="assets/counter-display.jpeg" alt="Hlogi Yummy Bakery products displayed on a counter"></figure>
-                    <figure class="gallery-item"><img src="assets/cookie-packs.jpeg" alt="Assorted biscuit packs with bakery stickers"></figure>
-                    <figure class="gallery-item"><img src="assets/packaged-biscuits.jpeg" alt="Packaged biscuits and muffins"></figure>
-                    <figure class="gallery-item"><img src="assets/scones-box.jpeg" alt="Box of fresh scones"></figure>
-                    <figure class="gallery-item"><img src="assets/mixed-boxes.jpeg" alt="Scones and biscuit boxes"></figure>
-                    <figure class="gallery-item"><img src="assets/shelf-display.jpeg" alt="Bakery products arranged on a shelf"></figure>
-                    <figure class="gallery-item"><img src="assets/display-stack.jpeg" alt="Stacked bakery containers"></figure>
-                    <figure class="gallery-item"><img src="assets/closeup-packaging.jpeg" alt="Close up of packaged scones"></figure>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact" aria-labelledby="contact-title">
-            <div class="container contact-grid">
-                <div>
-                    <p class="eyebrow">Contact</p>
-                    <h2 id="contact-title">Fresh orders, specials, and event packs.</h2>
-                    <p>Use the order builder for the cleanest WhatsApp message, or contact the bakery directly for custom bulk and event orders.</p>
-                    <div class="contact-details">
-                        <div><span>Official WhatsApp</span><strong>076 970 0695</strong></div>
-                        <div><span>Business account</span><strong>2479665247<br>Hlogi Yummy Bakery</strong></div>
-                        <div><span>Email</span><strong>mssceoyummybakery@gmail.com</strong></div>
-                        <div><span>Order notes</span><strong>Send product, quantity, date, and delivery choice.</strong></div>
-                    </div>
-                    <a class="button" href="#order"><svg class="icon"><use href="#icon-message"></use></svg> Start WhatsApp Order</a>
-                </div>
-                <div class="contact-photo">
-                    <img src="assets/display-stack.jpeg" alt="Hlogi Yummy Bakery packaged goods">
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-inner">
-            <img src="assets/logo.png" alt="Hlogi Yummy Bakery logo">
-            <span>(c) 2026 Hlogi Yummy Bakery. Freshly baked, made with love.</span>
+    <section class="section feature-section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-eyebrow">Why choose Hlogi</p>
+            <h2>Quality bakery products with a premium customer journey.</h2>
+          </div>
+          <p>Every page is structured to help guests explore the menu, review product benefits, and place orders quickly with confidence.</p>
         </div>
-    </footer>
 
-    <script>
-        const WHATSAPP_NUMBER = "27769700695";
-        const orderForm = document.querySelector("#orderForm");
-        const summaryBox = document.querySelector("#summaryBox");
-        const deliveryFields = document.querySelector("#deliveryFields");
-        const deliveryAddress = document.querySelector("#deliveryAddress");
-        const productRows = [...document.querySelectorAll(".product-row")];
-        const nav = document.querySelector(".nav");
-        const navToggle = document.querySelector(".nav-toggle");
-        const navLinks = document.querySelector("#navMenu");
+        <div class="card-grid">
+          <article class="feature-card">
+            <h3>Consistent fresh baking</h3>
+            <p>Daily production, careful portioning and high-quality ingredients across every item.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Professional order experience</h3>
+            <p>Easy navigation, clear options and WhatsApp confirmation for fast customer responses.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Event and corporate support</h3>
+            <p>Tailored bakery packs for meetings, celebrations and showroom display.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Local premium service</h3>
+            <p>Focused service and dependable delivery for every bakery order.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        function closeMobileNav() {
-            nav.classList.remove("is-open");
-            navToggle.setAttribute("aria-expanded", "false");
-            navToggle.setAttribute("aria-label", "Open menu");
-        }
+    <section class="section menu-preview">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-eyebrow">Our specialties</p>
+            <h2>Popular bakery items for every occasion.</h2>
+          </div>
+          <p>Explore our signature bakery range and choose the best selection for your event, shop or gifting order.</p>
+        </div>
 
-        navToggle.addEventListener("click", () => {
-            const isOpen = nav.classList.toggle("is-open");
-            navToggle.setAttribute("aria-expanded", String(isOpen));
-            navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
-        });
+        <div class="menu-grid">
+          <article class="menu-card"><h3>Scones</h3><p>Buttery, golden scones finished to serve at meetings, teas and gift sets.</p><span>Perfect for breakfast and hospitality</span></article>
+          <article class="menu-card"><h3>Muffins</h3><p>Rich muffins in chocolate, vanilla and seasonal fruit flavours.</p><span>Soft texture ideal for retail and events</span></article>
+          <article class="menu-card"><h3>Biscuits</h3><p>Fresh biscuit trays and gift boxes packaged with care.</p><span>Great for corporate gifting and event snacks</span></article>
+          <article class="menu-card"><h3>Event Packs</h3><p>Curated bakery bundles for celebrations, corporate meetings and daily specials.</p><span>Custom bundles for 10–100 people</span></article>
+        </div>
+      </div>
+    </section>
 
-        navLinks.querySelectorAll("a").forEach((link) => {
-            link.addEventListener("click", closeMobileNav);
-        });
+    <section class="section event-section">
+      <div class="container feature-row">
+        <div class="feature-copy">
+          <p class="section-eyebrow">How it works</p>
+          <h2>Three simple steps to place your bakery order.</h2>
+          <p>The process is built to feel polished, fast and reliable from the first click through to confirmation.</p>
+          <div class="card-grid steps-grid">
+            <article class="feature-card">
+              <h3>1. Select favourites</h3>
+              <p>Browse the menu, choose product quantities and customise your order with confidence.</p>
+            </article>
+            <article class="feature-card">
+              <h3>2. Share your details</h3>
+              <p>Add collection or delivery information and choose your preferred payment method.</p>
+            </article>
+            <article class="feature-card">
+              <h3>3. Confirm via WhatsApp</h3>
+              <p>Send your order directly and receive a prompt response from our bakery team.</p>
+            </article>
+          </div>
+        </div>
+        <img src="assets/multi-packages.jpeg" alt="Premium bakery packs ready for delivery" loading="lazy">
+      </div>
+    </section>
 
-        document.addEventListener("click", (event) => {
-            if (!nav.contains(event.target)) {
-                closeMobileNav();
-            }
-        });
+    <section class="section contact-strip">
+      <div class="container feature-row">
+        <div>
+          <p class="section-eyebrow">Contact support</p>
+          <h2>Need order help, pricing or event advice?</h2>
+          <p>Our bakery team is ready to assist with product recommendations, delivery planning and fast order turnaround.</p>
+          <div class="hero-actions">
+            <a class="button" href="contact.html">Contact us</a>
+            <a class="button secondary" href="order.html">Order now</a>
+          </div>
+        </div>
+        <div class="feature-card contact-summary">
+          <h3>Head office details</h3>
+          <p>Hlogi Yummy Bakery</p>
+          <p>Freshly baked. Made with care.</p>
+          <div class="hero-stats">
+            <div>
+              <strong>Office</strong>
+              <span>Greenstone Hill Office Park</span>
+            </div>
+            <div>
+              <strong>WhatsApp</strong>
+              <span><a href="tel:+27769700695">+27 76 970 0695</a></span>
+            </div>
+            <div>
+              <strong>Hours</strong>
+              <span>Mon–Sat • 07:00–18:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "Escape") {
-                closeMobileNav();
-            }
-        });
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Hlogi Yummy Bakery logo">
+        <div>
+          <strong>Hlogi Yummy Bakery</strong>
+          <p>Freshly baked. Made with love.</p>
+        </div>
+      </div>
+      <span>© 2026 Hlogi Yummy Bakery</span>
+    </div>
+  </footer>
 
-        function selectedProducts() {
-            return productRows
-                .map((row) => {
-                    const quantity = Math.max(0, Number(row.querySelector("input").value) || 0);
-                    return { name: row.dataset.product, quantity };
-                })
-                .filter((item) => item.quantity > 0);
-        }
-
-        function getRadioValue(name) {
-            const selected = document.querySelector(`input[name="${name}"]:checked`);
-            return selected ? selected.value : "";
-        }
-
-        function orderMessage() {
-            const items = selectedProducts();
-            const name = document.querySelector("#customerName").value.trim();
-            const phone = document.querySelector("#customerPhone").value.trim();
-            const date = document.querySelector("#orderDate").value;
-            const time = document.querySelector("#orderTime").value;
-            const fulfilment = getRadioValue("fulfilment");
-            const payment = getRadioValue("payment");
-            const address = deliveryAddress.value.trim();
-            const notes = document.querySelector("#orderNotes").value.trim();
-
-            const lines = [
-                "Hello Hlogi Yummy Bakery, I would like to place an order.",
-                "",
-                "Items:",
-                ...items.map((item) => `- ${item.name} x ${item.quantity}`),
-                "",
-                `Fulfilment: ${fulfilment}`,
-                fulfilment === "Delivery" && address ? `Delivery address: ${address}` : "",
-                date ? `Preferred date: ${date}` : "",
-                time ? `Preferred time: ${time}` : "",
-                `Payment option: ${payment}`,
-                name ? `Name: ${name}` : "",
-                phone ? `Customer phone: ${phone}` : "",
-                notes ? `Notes: ${notes}` : "",
-                "",
-                "Please confirm availability, total price, and payment details."
-            ];
-
-            return lines.filter(Boolean).join("\n");
-        }
-
-        function updateSummary() {
-            const items = selectedProducts();
-            if (!items.length) {
-                summaryBox.textContent = "Choose item quantities to build your order.";
-                return;
-            }
-            summaryBox.textContent = orderMessage();
-        }
-
-        productRows.forEach((row) => {
-            const input = row.querySelector("input");
-            row.querySelectorAll("button").forEach((button) => {
-                button.addEventListener("click", () => {
-                    const step = Number(button.dataset.step);
-                    input.value = Math.max(0, (Number(input.value) || 0) + step);
-                    updateSummary();
-                });
-            });
-            input.addEventListener("input", () => {
-                input.value = Math.max(0, Number(input.value) || 0);
-                updateSummary();
-            });
-        });
-
-        document.querySelectorAll("input, textarea").forEach((field) => {
-            field.addEventListener("input", updateSummary);
-            field.addEventListener("change", updateSummary);
-        });
-
-        document.querySelectorAll("input[name='fulfilment']").forEach((radio) => {
-            radio.addEventListener("change", () => {
-                const needsDelivery = getRadioValue("fulfilment") === "Delivery";
-                deliveryFields.hidden = !needsDelivery;
-                if (!needsDelivery) {
-                    deliveryAddress.value = "";
-                }
-                updateSummary();
-            });
-        });
-
-        orderForm.addEventListener("submit", (event) => {
-            event.preventDefault();
-            const items = selectedProducts();
-            if (!items.length) {
-                alert("Please choose at least one bakery item before sending your WhatsApp order.");
-                return;
-            }
-            if (getRadioValue("fulfilment") === "Delivery" && !deliveryAddress.value.trim()) {
-                deliveryAddress.focus();
-                alert("Please add a delivery address or choose collection.");
-                return;
-            }
-            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(orderMessage())}`;
-            window.open(url, "_blank", "noopener");
-        });
-
-        updateSummary();
-    </script>
+  <script src="script.js" defer></script>
 </body>
 </html>

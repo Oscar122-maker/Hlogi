@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Order from Hlogi Yummy Bakery using a professional WhatsApp order builder with product quantities, delivery options, and secure payment preferences.">
+  <title>Hlogi Yummy Bakery | Order</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Hlogi Yummy Bakery home">
+        <img src="assets/logo.png" alt="Hlogi Yummy Bakery logo">
+        <div class="brand-copy"><strong>Hlogi Yummy Bakery</strong><span>Freshly baked</span></div>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="siteMenu" aria-expanded="false" aria-label="Open site menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="siteMenu" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="order.html">Order</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero order-hero">
+      <div class="container hero-copy">
+        <p class="eyebrow">Order builder</p>
+        <h1>Compose your bakery order with a professional flow.</h1>
+        <p>Choose items, set quantities, select fulfilment and send a ready-made WhatsApp request to the bakery.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container order-layout">
+        <form class="order-builder" id="orderForm">
+          <div class="order-group">
+            <div class="section-title">
+              <span class="step-badge">Step 1</span>
+              <div>
+                <h2>Choose your products</h2>
+                <p>Pick quantities and preview the order details.</p>
+              </div>
+            </div>
+            <div class="order-products" aria-label="Order items">
+              <div class="product-row" data-product="Scones" data-price="18">
+                <div>
+                  <strong>Scones</strong>
+                  <p>Golden scones for tea, events and retail display.</p>
+                </div>
+                <div class="quantity-control">
+                  <button type="button" data-step="-1" aria-label="Decrease scones quantity">-</button>
+                  <input type="number" min="0" value="0" aria-label="Scones quantity">
+                  <button type="button" data-step="1" aria-label="Increase scones quantity">+</button>
+                </div>
+              </div>
+              <div class="product-row" data-product="Muffins" data-price="20">
+                <div>
+                  <strong>Muffins</strong>
+                  <p>Soft muffins in chocolate, vanilla and seasonal flavours.</p>
+                </div>
+                <div class="quantity-control">
+                  <button type="button" data-step="-1" aria-label="Decrease muffins quantity">-</button>
+                  <input type="number" min="0" value="0" aria-label="Muffins quantity">
+                  <button type="button" data-step="1" aria-label="Increase muffins quantity">+</button>
+                </div>
+              </div>
+              <div class="product-row" data-product="Biscuits" data-price="45">
+                <div>
+                  <strong>Biscuits</strong>
+                  <p>Assorted biscuit packs ideal for gifting and retail.</p>
+                </div>
+                <div class="quantity-control">
+                  <button type="button" data-step="-1" aria-label="Decrease biscuits quantity">-</button>
+                  <input type="number" min="0" value="0" aria-label="Biscuits quantity">
+                  <button type="button" data-step="1" aria-label="Increase biscuits quantity">+</button>
+                </div>
+              </div>
+              <div class="product-row" data-product="Bread" data-price="35">
+                <div>
+                  <strong>Bread</strong>
+                  <p>Fresh loaves for home, office and event table service.</p>
+                </div>
+                <div class="quantity-control">
+                  <button type="button" data-step="-1" aria-label="Decrease bread quantity">-</button>
+                  <input type="number" min="0" value="0" aria-label="Bread quantity">
+                  <button type="button" data-step="1" aria-label="Increase bread quantity">+</button>
+                </div>
+              </div>
+              <div class="product-row" data-product="Jam Tarts" data-price="15">
+                <div>
+                  <strong>Jam Tarts</strong>
+                  <p>Sweet jam tarts with crisp pastry and bright filling.</p>
+                </div>
+                <div class="quantity-control">
+                  <button type="button" data-step="-1" aria-label="Decrease jam tarts quantity">-</button>
+                  <input type="number" min="0" value="0" aria-label="Jam tarts quantity">
+                  <button type="button" data-step="1" aria-label="Increase jam tarts quantity">+</button>
+                </div>
+              </div>
+              <div class="product-row" data-product="Banana Bread" data-price="55">
+                <div>
+                  <strong>Banana Bread</strong>
+                  <p>Moist banana bread available by loaf or slice.</p>
+                </div>
+                <div class="quantity-control">
+                  <button type="button" data-step="-1" aria-label="Decrease banana bread quantity">-</button>
+                  <input type="number" min="0" value="0" aria-label="Banana bread quantity">
+                  <button type="button" data-step="1" aria-label="Increase banana bread quantity">+</button>
+                </div>
+              </div>
+              <div class="product-row" data-product="Winter Special" data-price="200">
+                <div>
+                  <strong>Winter Special</strong>
+                  <p>5 scones and a 2-litre drink for small gatherings.</p>
+                </div>
+                <div class="quantity-control">
+                  <button type="button" data-step="-1" aria-label="Decrease winter special quantity">-</button>
+                  <input type="number" min="0" value="0" aria-label="Winter special quantity">
+                  <button type="button" data-step="1" aria-label="Increase winter special quantity">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-group">
+            <div class="section-title">
+              <span class="step-badge">Step 2</span>
+              <div>
+                <h2>Your details</h2>
+                <p>Share the contact and timing details we need to confirm your order.</p>
+              </div>
+            </div>
+            <div class="field-grid">
+              <label class="field">Name<input id="customerName" type="text" name="customerName" placeholder="Full name"></label>
+              <label class="field">Phone<input id="customerPhone" type="text" name="customerPhone" placeholder="WhatsApp number"></label>
+              <label class="field">Preferred date<input id="orderDate" type="date" name="orderDate"></label>
+              <label class="field">Preferred time<input id="orderTime" type="time" name="orderTime"></label>
+            </div>
+          </div>
+
+          <div class="order-group">
+            <div class="section-title">
+              <span class="step-badge">Step 3</span>
+              <div>
+                <h2>Delivery or collection</h2>
+                <p>Pick the fulfilment method and add a delivery address if needed.</p>
+              </div>
+            </div>
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" name="fulfilment" value="Collection" checked><span>Collection</span></label>
+              <label class="choice"><input type="radio" name="fulfilment" value="Delivery"><span>Delivery</span></label>
+            </div>
+            <div class="delivery-fields" id="deliveryFields" hidden>
+              <label class="field">Delivery address<textarea id="deliveryAddress" name="deliveryAddress" placeholder="Street, suburb, city"></textarea></label>
+            </div>
+          </div>
+
+          <div class="order-group">
+            <div class="section-title">
+              <span class="step-badge">Step 4</span>
+              <div>
+                <h2>Payment</h2>
+                <p>Select the payment option you prefer for confirmation.</p>
+              </div>
+            </div>
+            <div class="choice-grid three">
+              <label class="choice"><input type="radio" name="payment" value="EFT / bank transfer" checked><span>EFT</span></label>
+              <label class="choice"><input type="radio" name="payment" value="Cash on collection"><span>Cash</span></label>
+              <label class="choice"><input type="radio" name="payment" value="Please send payment details"><span>Send details</span></label>
+            </div>
+          </div>
+
+          <div class="order-group">
+            <div class="section-title">
+              <span class="step-badge">Step 5</span>
+              <div>
+                <h2>Order notes</h2>
+                <p>Add allergy notes, packaging requests or special instructions.</p>
+              </div>
+            </div>
+            <label class="field">Notes<textarea id="orderNotes" name="orderNotes" placeholder="Example: glazed muffins, gluten-free option, event setup"></textarea></label>
+          </div>
+        </form>
+
+        <aside class="summary-panel" aria-live="polite">
+          <div class="summary-header">
+            <p class="section-eyebrow">Order preview</p>
+            <h2>WhatsApp summary</h2>
+          </div>
+          <div class="summary-grid">
+            <div class="summary-item"><span>Fulfilment</span><strong id="summaryFulfilment">Collection</strong></div>
+            <div class="summary-item"><span>Payment</span><strong id="summaryPayment">EFT</strong></div>
+            <div class="summary-item"><span>Date & time</span><strong id="summaryDate">Not set</strong></div>
+            <div class="summary-item"><span>Contact</span><strong id="summaryContact">Pending</strong></div>
+          </div>
+          <div class="summary-box" id="summaryBox">Choose products to preview your order.</div>
+          <div class="summary-meta">
+            <div><strong>Total</strong><span id="summaryTotal">R0</span></div>
+            <div><strong>WhatsApp</strong><span>076 970 0695</span></div>
+          </div>
+          <button class="button" type="button" id="sendOrder">Send order</button>
+          <p class="form-note">You will review the final message in WhatsApp before sending.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Hlogi Yummy Bakery logo">
+        <div>
+          <strong>Hlogi Yummy Bakery</strong>
+          <p>Official bakery orders only.</p>
+        </div>
+      </div>
+      <span>© 2026 Hlogi Yummy Bakery</span>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
