@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Order from Hlogi Yummy Bakery using a professional WhatsApp order builder with product quantities, delivery options, and secure payment preferences.">
   <title>Hlogi Yummy Bakery | Order</title>
+  <meta property="og:title" content="Hlogi Yummy Bakery | Seamless Ordering">
+  <meta property="og:description" content="Compose your artisanal bakery order with a refined, professional flow.">
+  <meta property="og:image" content="assets/order-method.jpeg">
+  <meta property="og:url" content="https://hlogiyummybakery.co.za/order.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,11 +25,11 @@
         <span></span><span></span><span></span>
       </button>
       <nav class="site-nav" id="siteMenu" aria-label="Primary navigation">
-        <a href="index.html">Home</a>
-        <a href="menu.html">Menu</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="order.html">Order</a>
-        <a href="contact.html">Contact</a>
+        <a href="index.html" aria-label="Navigate to Home">Home</a>
+        <a href="menu.html" aria-label="View our Menu">Menu</a>
+        <a href="gallery.html" aria-label="Browse our Gallery">Gallery</a>
+        <a href="order.html" aria-label="Place an Order">Order</a>
+        <a href="contact.html" aria-label="Contact the Bakery">Contact</a>
       </nav>
     </div>
   </header>
@@ -189,23 +196,25 @@
         </form>
 
         <aside class="summary-panel" aria-live="polite">
-          <div class="summary-header">
-            <p class="section-eyebrow">Order preview</p>
-            <h2>WhatsApp summary</h2>
+          <div class="receipt-inner">
+            <div class="summary-header">
+              <p class="section-eyebrow">Order preview</p>
+              <h2>WhatsApp summary</h2>
+            </div>
+            <div class="summary-grid">
+              <div class="summary-item"><span>Fulfilment</span><strong id="summaryFulfilment">Collection</strong></div>
+              <div class="summary-item"><span>Payment</span><strong id="summaryPayment">EFT</strong></div>
+              <div class="summary-item"><span>Date & time</span><strong id="summaryDate">Not set</strong></div>
+              <div class="summary-item"><span>Contact</span><strong id="summaryContact">Pending</strong></div>
+            </div>
+            <div class="summary-box" id="summaryBox">Choose products to preview your order.</div>
+            <div class="summary-meta">
+              <div><strong>Total</strong><span id="summaryTotal">R0</span></div>
+              <div><strong>WhatsApp</strong><span>076 970 0695</span></div>
+            </div>
+            <button class="button" type="button" id="sendOrder">Send order</button>
+            <p class="form-note">You will review the final message in WhatsApp before sending.</p>
           </div>
-          <div class="summary-grid">
-            <div class="summary-item"><span>Fulfilment</span><strong id="summaryFulfilment">Collection</strong></div>
-            <div class="summary-item"><span>Payment</span><strong id="summaryPayment">EFT</strong></div>
-            <div class="summary-item"><span>Date & time</span><strong id="summaryDate">Not set</strong></div>
-            <div class="summary-item"><span>Contact</span><strong id="summaryContact">Pending</strong></div>
-          </div>
-          <div class="summary-box" id="summaryBox">Choose products to preview your order.</div>
-          <div class="summary-meta">
-            <div><strong>Total</strong><span id="summaryTotal">R0</span></div>
-            <div><strong>WhatsApp</strong><span>076 970 0695</span></div>
-          </div>
-          <button class="button" type="button" id="sendOrder">Send order</button>
-          <p class="form-note">You will review the final message in WhatsApp before sending.</p>
         </aside>
       </div>
     </section>
