@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hlogi Yummy Bakery gallery showing fresh packaging, event orders, and finished bakery products.">
+  <meta name="description" content="View Hlogi Yummy Bakery product photos, branded packaging, store displays and fresh bakery packs.">
   <title>Hlogi Yummy Bakery | Gallery</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -23,93 +23,59 @@
         <a href="gallery.html">Gallery</a>
         <a href="order.html">Order</a>
         <a href="contact.html">Contact</a>
+        <a class="nav-cta" href="order.html">Order now</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero gallery-hero">
-      <div class="container hero-copy">
-        <p class="eyebrow">Gallery</p>
-        <h1>See the finished bakery products and premium packaging.</h1>
-        <p>Explore real photos of Hlogi Yummy Bakery trays, event packs and polished presentation.</p>
-      </div>
-    </section>
-
-    <section class="section">
+    <section class="section white">
       <div class="container">
         <div class="section-head">
           <div>
-            <p class="section-eyebrow">Real bakery photos</p>
-            <h2>Fresh products and thoughtful presentation.</h2>
+            <p class="section-eyebrow">Product presentation</p>
+            <h2>Fresh bakes, clean packaging and shelf-ready branding.</h2>
           </div>
-          <p>Our gallery shows bakery items ready for events, gifting and premium retail display.</p>
+          <p>Click any image to view it larger. The gallery uses product images only, keeping the website focused and professional.</p>
         </div>
-
         <div class="gallery-grid">
-          <figure class="gallery-item"><a class="gallery-link" href="assets/counter-display.jpeg"><img src="assets/counter-display.jpeg" alt="Bakery products displayed on a counter"></a></figure>
+          <figure class="gallery-item large"><a class="gallery-link" href="assets/counter-display.jpeg"><img src="assets/counter-display.jpeg" alt="Bakery products displayed on a counter"></a></figure>
           <figure class="gallery-item"><a class="gallery-link" href="assets/cookie-packs.jpeg"><img src="assets/cookie-packs.jpeg" alt="Assorted biscuit packs"></a></figure>
           <figure class="gallery-item"><a class="gallery-link" href="assets/scones-box.jpeg"><img src="assets/scones-box.jpeg" alt="Box of fresh scones"></a></figure>
           <figure class="gallery-item"><a class="gallery-link" href="assets/mixed-boxes.jpeg"><img src="assets/mixed-boxes.jpeg" alt="Mixed bakery boxes"></a></figure>
           <figure class="gallery-item"><a class="gallery-link" href="assets/shelf-display.jpeg"><img src="assets/shelf-display.jpeg" alt="Bakery products on a shelf"></a></figure>
           <figure class="gallery-item"><a class="gallery-link" href="assets/display-stack.jpeg"><img src="assets/display-stack.jpeg" alt="Stacked bakery containers"></a></figure>
-        </div>
-
-        <section class="section event-list-section">
-          <div class="container">
-            <div class="section-head">
-              <div>
-                <p class="section-eyebrow">Events hosted</p>
-                <h2>Upcoming bakery pop-up dates and times.</h2>
-              </div>
-              <p>Join our next bakery events to taste fresh treats, discover custom bundles, and celebrate premium baked goods.</p>
-            </div>
-
-            <div class="event-grid">
-              <article class="event-card">
-                <div class="event-card-top">
-                  <img src="assets/event-pop-up.jpeg" alt="Bakery event preview">
-                  <div>
-                    <p class="event-eyebrow">Featured pop-up</p>
-                    <h3>Saturday pop-up showcase</h3>
-                    <p>May 23, 2026 • 11:00 AM</p>
-                  </div>
-                </div>
-                <p>Experience the premium bakery launch with fresh sampling, event-only packs and expert order support.</p>
-              </article>
-              <article class="event-card">
-                <div class="event-card-top">
-                  <img src="assets/multi-packages.jpeg" alt="Bakery packaging event preview">
-                  <div>
-                    <p class="event-eyebrow">Business tasting</p>
-                    <h3>Corporate gift preview</h3>
-                    <p>June 20 • 10:00 AM</p>
-                  </div>
-                </div>
-                <p>Preview our event-ready bakery bundles for meetings, celebrations, and retail gifting.</p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <div class="image-modal" id="imageModal" aria-hidden="true">
-          <button class="modal-close" type="button" aria-label="Close full image">×</button>
-          <img id="modalImage" src="" alt="Full bakery gallery image">
+          <figure class="gallery-item"><a class="gallery-link" href="assets/packaged-biscuits.jpeg"><img src="assets/packaged-biscuits.jpeg" alt="Packaged biscuits and muffins"></a></figure>
+          <figure class="gallery-item"><a class="gallery-link" href="assets/closeup-packaging.jpeg"><img src="assets/closeup-packaging.jpeg" alt="Close-up of labelled packaging"></a></figure>
         </div>
       </div>
     </section>
+
+    <section class="section">
+      <div class="container feature-row">
+        <img src="assets/store-shelf.jpeg" alt="Hlogi Yummy Bakery products displayed in store">
+        <div class="feature-copy">
+          <p class="section-eyebrow">Retail and events</p>
+          <h2>Packaging that is easy to recognise.</h2>
+          <p>The strong pink sticker, clear containers and neat boxes help customers identify the bakery quickly on counters, shelves and event tables.</p>
+          <a class="button" href="order.html">Order from the gallery</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="image-modal" id="imageModal" aria-hidden="true">
+      <button class="modal-close" type="button" aria-label="Close full image">&times;</button>
+      <img id="modalImage" src="" alt="Full bakery gallery image">
+    </div>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
         <img src="assets/logo.png" alt="Hlogi Yummy Bakery logo">
-        <div>
-          <strong>Hlogi Yummy Bakery</strong>
-          <p>Quality bakery visuals.</p>
-        </div>
+        <div><strong>Hlogi Yummy Bakery</strong><p>Product and packaging gallery.</p></div>
       </div>
-      <span>© 2026 Hlogi Yummy Bakery</span>
+      <span>&copy; 2026 Hlogi Yummy Bakery</span>
     </div>
   </footer>
 
