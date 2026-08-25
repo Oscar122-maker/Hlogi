@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Order from Hlogi Yummy Bakery with a professional WhatsApp order builder for products, delivery and payment preference.">
-  <title>Hlogi Yummy Bakery | Order</title>
+  <meta name="description" content="Order from The Biscuit Man – choose single or bulk, pick your favourite flavours, and send a ready WhatsApp order.">
+  <title>The Biscuit Man | Order</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Hlogi Yummy Bakery home">
-        <img src="assets/logo.png" alt="Hlogi Yummy Bakery logo">
-        <div class="brand-copy"><strong>Hlogi Yummy Bakery</strong><span>Freshly baked</span></div>
+      <a class="brand" href="index.html" aria-label="The Biscuit Man home">
+        <img src="assets/logo.png" alt="The Biscuit Man logo">
+        <div class="brand-copy"><strong>The Biscuit Man</strong><span>Bulk · Flavour · Cape Town</span></div>
       </a>
       <button class="nav-toggle" type="button" aria-controls="siteMenu" aria-expanded="false" aria-label="Open site menu">
         <span></span><span></span><span></span>
@@ -35,27 +35,88 @@
           <div class="order-group">
             <div class="section-title">
               <span class="step-badge">Step 1</span>
-              <div><h2>Choose your products</h2><p>Prices are estimates for preview. The bakery confirms the final total on WhatsApp.</p></div>
+              <div>
+                <h2>Order type & products</h2>
+                <p>Choose single pack or bulk, then select quantities. Open the flavour window to customise.</p>
+              </div>
             </div>
+
+            <div class="flavor-bulk-bar">
+              <div>
+                <span style="font-size:0.82rem;font-weight:700;color:var(--plum);display:block;margin-bottom:6px;">Order type</span>
+                <div class="order-type-toggle" id="orderTypeToggle">
+                  <button type="button" data-type="Single" class="active">Single pack</button>
+                  <button type="button" data-type="Bulk">Bulk order</button>
+                </div>
+              </div>
+              <div>
+                <span style="font-size:0.82rem;font-weight:700;color:var(--plum);display:block;margin-bottom:6px;">Custom flavours</span>
+                <button type="button" class="open-flavor-btn" id="openFlavorModal">+ Choose flavours</button>
+              </div>
+            </div>
+
+            <div class="selected-flavors-preview" id="selectedFlavorsPreview" aria-live="polite"></div>
+
             <div class="order-products" aria-label="Order items">
-              <div class="product-row" data-product="Scones" data-price="18"><div><strong>Scones</strong><p>Golden scones for tea, events and retail display.</p></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Decrease scones quantity">-</button><input type="number" min="0" value="0" aria-label="Scones quantity"><button type="button" data-step="1" aria-label="Increase scones quantity">+</button></div></div>
-              <div class="product-row" data-product="Muffins" data-price="20"><div><strong>Muffins</strong><p>Soft muffins for lunch boxes, meetings and gifting.</p></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Decrease muffins quantity">-</button><input type="number" min="0" value="0" aria-label="Muffins quantity"><button type="button" data-step="1" aria-label="Increase muffins quantity">+</button></div></div>
-              <div class="product-row" data-product="Biscuits" data-price="45"><div><strong>Biscuits</strong><p>Assorted biscuit packs in branded containers.</p></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Decrease biscuits quantity">-</button><input type="number" min="0" value="0" aria-label="Biscuits quantity"><button type="button" data-step="1" aria-label="Increase biscuits quantity">+</button></div></div>
-              <div class="product-row" data-product="Bread" data-price="35"><div><strong>Bread</strong><p>Fresh loaves for home, office and events.</p></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Decrease bread quantity">-</button><input type="number" min="0" value="0" aria-label="Bread quantity"><button type="button" data-step="1" aria-label="Increase bread quantity">+</button></div></div>
-              <div class="product-row" data-product="Jam Tarts" data-price="15"><div><strong>Jam Tarts</strong><p>Sweet jam tarts with crisp pastry.</p></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Decrease jam tarts quantity">-</button><input type="number" min="0" value="0" aria-label="Jam tarts quantity"><button type="button" data-step="1" aria-label="Increase jam tarts quantity">+</button></div></div>
-              <div class="product-row" data-product="Banana Bread" data-price="55"><div><strong>Banana Bread</strong><p>Moist banana bread by loaf or slice.</p></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Decrease banana bread quantity">-</button><input type="number" min="0" value="0" aria-label="Banana bread quantity"><button type="button" data-step="1" aria-label="Increase banana bread quantity">+</button></div></div>
-              <div class="product-row" data-product="Event Pack" data-price="250"><div><strong>Event Pack</strong><p>Custom pack for meetings, pop-ups or gatherings.</p></div><div class="quantity-control"><button type="button" data-step="-1" aria-label="Decrease event pack quantity">-</button><input type="number" min="0" value="0" aria-label="Event pack quantity"><button type="button" data-step="1" aria-label="Increase event pack quantity">+</button></div></div>
+              <div class="product-row" data-product="Assorted Packs" data-price="55">
+                <div><strong>Assorted Packs</strong><p>Mixed favourite flavours in branded packaging.</p></div>
+                <div class="quantity-control">
+                  <button type="button" data-step="-1" aria-label="Decrease assorted quantity">−</button>
+                  <input type="number" min="0" value="0" aria-label="Assorted packs quantity">
+                  <button type="button" data-step="1" aria-label="Increase assorted quantity">+</button>
+                </div>
+              </div>
+              <div class="product-row" data-product="Chocolate Chip" data-price="60">
+                <div><strong>Chocolate Chip</strong><p>Rich chocolate chip biscuits.</p></div>
+                <div class="quantity-control">
+                  <button type="button" data-step="-1" aria-label="Decrease chocolate quantity">−</button>
+                  <input type="number" min="0" value="0" aria-label="Chocolate chip quantity">
+                  <button type="button" data-step="1" aria-label="Increase chocolate quantity">+</button>
+                </div>
+              </div>
+              <div class="product-row" data-product="Ginger" data-price="50">
+                <div><strong>Ginger</strong><p>Warm spicy ginger biscuits.</p></div>
+                <div class="quantity-control">
+                  <button type="button" data-step="-1" aria-label="Decrease ginger quantity">−</button>
+                  <input type="number" min="0" value="0" aria-label="Ginger quantity">
+                  <button type="button" data-step="1" aria-label="Increase ginger quantity">+</button>
+                </div>
+              </div>
+              <div class="product-row" data-product="Shortbread" data-price="65">
+                <div><strong>Shortbread</strong><p>Buttery shortbread for tea and gifting.</p></div>
+                <div class="quantity-control">
+                  <button type="button" data-step="-1" aria-label="Decrease shortbread quantity">−</button>
+                  <input type="number" min="0" value="0" aria-label="Shortbread quantity">
+                  <button type="button" data-step="1" aria-label="Increase shortbread quantity">+</button>
+                </div>
+              </div>
+              <div class="product-row" data-product="Vanilla Butter" data-price="48">
+                <div><strong>Vanilla Butter</strong><p>Light vanilla butter biscuits.</p></div>
+                <div class="quantity-control">
+                  <button type="button" data-step="-1" aria-label="Decrease vanilla quantity">−</button>
+                  <input type="number" min="0" value="0" aria-label="Vanilla quantity">
+                  <button type="button" data-step="1" aria-label="Increase vanilla quantity">+</button>
+                </div>
+              </div>
+              <div class="product-row" data-product="Custom Bulk Box" data-price="250">
+                <div><strong>Custom Bulk Box</strong><p>Large custom mix — ideal for markets & events.</p></div>
+                <div class="quantity-control">
+                  <button type="button" data-step="-1" aria-label="Decrease custom bulk quantity">−</button>
+                  <input type="number" min="0" value="0" aria-label="Custom bulk quantity">
+                  <button type="button" data-step="1" aria-label="Increase custom bulk quantity">+</button>
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="order-group">
             <div class="section-title">
               <span class="step-badge">Step 2</span>
-              <div><h2>Your details</h2><p>Share contact and timing details for confirmation.</p></div>
+              <div><h2>Your details</h2><p>Share contact and timing so we can confirm quickly.</p></div>
             </div>
             <div class="field-grid">
-              <label class="field">Name<input id="customerName" type="text" name="customerName" placeholder="Full name"></label>
-              <label class="field">Phone<input id="customerPhone" type="text" name="customerPhone" placeholder="WhatsApp number"></label>
+              <label class="field">Name<input id="customerName" type="text" name="customerName" placeholder="Full name" autocomplete="name"></label>
+              <label class="field">WhatsApp number<input id="customerPhone" type="tel" name="customerPhone" placeholder="e.g. 064 091 7447" autocomplete="tel"></label>
               <label class="field">Preferred date<input id="orderDate" type="date" name="orderDate"></label>
               <label class="field">Preferred time<input id="orderTime" type="time" name="orderTime"></label>
             </div>
@@ -64,21 +125,21 @@
           <div class="order-group">
             <div class="section-title">
               <span class="step-badge">Step 3</span>
-              <div><h2>Delivery or collection</h2><p>Delivery availability and fee are confirmed before payment.</p></div>
+              <div><h2>Collection or delivery</h2><p>Courier nationwide available. Fee confirmed before payment.</p></div>
             </div>
             <div class="choice-grid">
-              <label class="choice"><input type="radio" name="fulfilment" value="Collection" checked><span>Collection</span></label>
-              <label class="choice"><input type="radio" name="fulfilment" value="Delivery"><span>Delivery</span></label>
+              <label class="choice"><input type="radio" name="fulfilment" value="Collection" checked><span>Collection (Cape Town)</span></label>
+              <label class="choice"><input type="radio" name="fulfilment" value="Courier / Delivery"><span>Courier nationwide</span></label>
             </div>
             <div class="delivery-fields" id="deliveryFields" hidden>
-              <label class="field">Delivery address<textarea id="deliveryAddress" name="deliveryAddress" placeholder="Street, suburb, city and delivery notes"></textarea></label>
+              <label class="field">Delivery / courier address<textarea id="deliveryAddress" name="deliveryAddress" placeholder="Street, suburb, city, province and any delivery notes"></textarea></label>
             </div>
           </div>
 
           <div class="order-group">
             <div class="section-title">
               <span class="step-badge">Step 4</span>
-              <div><h2>Payment preference</h2><p>Only use official payment details provided by the bakery.</p></div>
+              <div><h2>Payment preference</h2><p>Only use official payment details provided after confirmation.</p></div>
             </div>
             <div class="choice-grid four">
               <label class="choice"><input type="radio" name="payment" value="EFT / bank transfer" checked><span>EFT</span></label>
@@ -91,9 +152,9 @@
           <div class="order-group">
             <div class="section-title">
               <span class="step-badge">Step 5</span>
-              <div><h2>Order notes</h2><p>Add packaging, flavour or event details.</p></div>
+              <div><h2>Order notes</h2><p>Allergies, packaging requests, event details or special instructions.</p></div>
             </div>
-            <label class="field">Notes<textarea id="orderNotes" name="orderNotes" placeholder="Example: assorted biscuits, event order, packaging request, allergy notes"></textarea></label>
+            <label class="field">Notes<textarea id="orderNotes" name="orderNotes" placeholder="Example: mix of chocolate & ginger, gift packaging, market order for Saturday"></textarea></label>
           </div>
         </form>
 
@@ -103,19 +164,19 @@
             <h2>WhatsApp summary</h2>
           </div>
           <div class="summary-grid">
+            <div class="summary-item"><span>Order type</span><strong id="summaryOrderType">Single pack</strong></div>
             <div class="summary-item"><span>Fulfilment</span><strong id="summaryFulfilment">Collection</strong></div>
             <div class="summary-item"><span>Payment</span><strong id="summaryPayment">EFT</strong></div>
-            <div class="summary-item"><span>Date and time</span><strong id="summaryDate">Not set</strong></div>
-            <div class="summary-item"><span>Contact</span><strong id="summaryContact">Pending</strong></div>
+            <div class="summary-item"><span>Date & time</span><strong id="summaryDate">Not set</strong></div>
           </div>
-          <div class="summary-box" id="summaryBox">Choose products and quantities to preview the WhatsApp order message.</div>
+          <div class="summary-box" id="summaryBox">Choose products, flavours and quantities to preview your WhatsApp order message.</div>
           <div class="summary-meta">
-            <div><strong>Total</strong><span id="summaryTotal">R0</span></div>
-            <div><strong>WhatsApp</strong><span>076 970 0695</span></div>
+            <div><strong>Est. total</strong><span id="summaryTotal">R0</span></div>
+            <div><strong>WhatsApp</strong><span>064 091 7447</span></div>
           </div>
           <div class="trust-note">
             <strong>Safe order reminder</strong>
-            <span>Final total and payment details are confirmed by the bakery before you pay.</span>
+            <span>Final total, bulk pricing and payment details are confirmed by The Biscuit Man before you pay.</span>
           </div>
           <button class="button" type="button" id="sendOrder">Send order on WhatsApp</button>
           <p class="form-note">You will review the final message in WhatsApp before sending.</p>
@@ -124,13 +185,29 @@
     </section>
   </main>
 
+  <!-- Flavour selection modal -->
+  <div class="flavor-modal" id="flavorModal" aria-hidden="true" role="dialog" aria-labelledby="flavorModalTitle">
+    <div class="flavor-modal-content">
+      <button type="button" class="modal-close-x" id="closeFlavorModal" aria-label="Close flavour window">&times;</button>
+      <h2 id="flavorModalTitle">Choose your flavours</h2>
+      <p>Select the flavours you want, set quantities and whether each should be single or bulk. These details are added to your WhatsApp order.</p>
+      <div class="flavor-list" id="flavorList">
+        <!-- populated by JS -->
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="button secondary" id="clearFlavors">Clear all</button>
+        <button type="button" class="button" id="applyFlavors">Apply flavours</button>
+      </div>
+    </div>
+  </div>
+
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <img src="assets/logo.png" alt="Hlogi Yummy Bakery logo">
-        <div><strong>Hlogi Yummy Bakery</strong><p>Official bakery orders only.</p></div>
+        <img src="assets/logo.png" alt="The Biscuit Man logo">
+        <div><strong>The Biscuit Man</strong><p>Official biscuit orders only</p></div>
       </div>
-      <span>&copy; 2026 Hlogi Yummy Bakery</span>
+      <span>&copy; 2026 The Biscuit Man</span>
     </div>
   </footer>
 
